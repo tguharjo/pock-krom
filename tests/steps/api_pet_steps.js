@@ -89,7 +89,12 @@ Then('the response should contain the updated pet data', async function () {
 
 When('I send a DELETE request to pet endpoint with id', async function ({ request }) {
   const baseUrl = process.env.BASE_URL;
-  response = await request.delete(`${baseUrl}/pet/${this.petId}`);
+  response = await request.delete(`${baseUrl}/pet/${this.petId}`, {
+    headers: {
+      'accept': 'application/json',
+      'api_key': 'special-key'
+    }
+  });
 });
 
 Then('the pet should no longer exist', async function ({ request }) {
